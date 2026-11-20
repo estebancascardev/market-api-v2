@@ -41,6 +41,9 @@ export class UserModel extends Model {
             isIn: [['F', 'M']],
           },
         },
+        rolId: {
+          type: DataTypes.INTEGER,
+        },
       },
       {
         sequelize,

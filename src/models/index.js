@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { Sequelize } from 'sequelize';
+import { RolesModel } from './rol.model.js';
 import { UserModel } from './user.model.js';
 
 const requiredEnvironmentVariables = [
@@ -39,6 +40,7 @@ export const sequelize = new Sequelize(
 );
 
 export const User = UserModel.initModel(sequelize);
+export const Role = RolesModel.initModel(sequelize);
 
 export async function testConnection() {
   await sequelize.authenticate();
