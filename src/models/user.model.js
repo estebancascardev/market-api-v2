@@ -43,6 +43,10 @@ export class UserModel extends Model {
         },
         rolId: {
           type: DataTypes.INTEGER,
+          references: {
+            model: 'RolesModel',
+            key: 'id'
+          }
         },
       },
       {
