@@ -41,6 +41,8 @@ export const sequelize = new Sequelize(
 
 export const User = UserModel.initModel(sequelize);
 export const Role = RolesModel.initModel(sequelize);
+User.belongsTo(Role,{foreignKey: 'rolId'});
+Role.hasMany(User, {foreignKey: 'rolId'})
 
 export async function testConnection() {
   await sequelize.authenticate();

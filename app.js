@@ -8,7 +8,7 @@ const port = Number(process.env.APP_PORT);
 
 app.use(express.json());
 app.use('/auth', authRouter);
-app.use("/users",userRouter);
+app.use("/users", userRouter);
 
 if (!Number.isInteger(port) || port < 1 || port > 65535) {
   throw new Error('APP_PORT debe ser un puerto válido entre 1 y 65535.');

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { User } from '../models/index.js';
+import { User,Role } from '../models/index.js';
 
 export const login = async (req, res) => {
 	const { email, password } = req.body ?? {};
@@ -13,7 +13,13 @@ export const login = async (req, res) => {
 	}
 
 	try {
-		const user = await User.findOne({ where: { email } });
+		const user = await User.findOne({ where: { email },
+		include:[
+			{
+				model:Role,
+				attributes:['id', 'name', 'description', 'isActive']
+			}
+		] });
 		if (!user || !(await user.comparePassword(password))) {
 			return res.status(401).json({ message: 'Correo o contraseña incorrectos.' });
 		}
@@ -29,6 +35,7 @@ export const login = async (req, res) => {
 
 		return res.status(200).json({ token, user: userData });
 	} catch (_error) {
+		console.log(_error)
 		return res.status(500).json({ message: 'No se pudo iniciar sesión.' });
 	}
 };
